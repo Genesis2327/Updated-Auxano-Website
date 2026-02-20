@@ -42,13 +42,13 @@ function initInteractions() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const partials = [
-        { id: 'header-root', file: 'partials/header.html' },
-        { id: 'hero-root', file: 'partials/hero.html' },
-        { id: 'features-root', file: 'partials/features.html' },
-        { id: 'how-root', file: 'partials/how-it-works.html' },
-        { id: 'contact-root', file: 'partials/contact.html' },
-        { id: 'cta-root', file: 'partials/cta.html' },
-        { id: 'footer-root', file: 'partials/footer.html' }
+        { id: 'header-root', file: 'Sections/header.html' },
+        { id: 'hero-root', file: 'Sections/home.html' },
+        { id: 'features-root', file: 'Sections/features.html' },
+        { id: 'how-root', file: 'Sections/how_it_works.html' },
+        { id: 'contact-root', file: 'Sections/contact.html' },
+        { id: 'cta-root', file: 'Sections/book_a_demo.html' },
+        { id: 'footer-root', file: 'Sections/footer.html' }
     ];
 
     Promise.all(
