@@ -80,12 +80,12 @@ window.addEventListener('DOMContentLoaded', () => {
             calendlyLoaded = true;
         }
     }
-        // Book a Demo button: open new booking page
+        // Book a Demo button: go to booking page in same tab
         document.querySelectorAll('a.btn-nav, a.btn-hero-demo, a.btn.btn-outline-dark').forEach(btn => {
             if (btn.textContent.trim().toLowerCase().includes('book a demo')) {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    window.open('calendly-book-demo.html', '_blank', 'noopener');
+                    window.location.href = 'calendly-book-demo.html';
                 });
             }
         });
