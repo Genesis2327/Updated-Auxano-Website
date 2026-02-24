@@ -541,6 +541,98 @@ img { max-width: 100%; height: auto; display: block; }
     justify-content: center;
 }
 
+/*Why Section*/
+/* Why Auxano section and carousel */
+.why-auxano {
+    padding: 48px 0 72px;
+    background: linear-gradient(90deg, #ffffff, #e1e5f1, #72c9d1);
+}
+.why-auxano .section-title {
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--blue-darker);
+}
+.why-auxano .why-subtitle {
+    text-align: center;
+    color: var(--blue-dark);
+    max-width: 900px;
+    margin: 0 auto 28px;
+    font-weight: 500;
+}
+/* New 3-panel layout */
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    /* span full viewport width */
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+.why-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0; /* flush edges when full-bleed */
+    min-height: 200px;
+    display: flex;
+    align-items: stretch;
+}
+.why-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+
+/* hover zoom for non-open cards */
+.why-card img { 
+    transition: transform 0.45s ease; 
+}
+.why-card:not(.open):hover img {
+     transform: scale(1.035); 
+    }
+
+.why-desc-content { 
+    max-width: 720px; 
+}
+.why-cta { 
+    display: inline-block; margin-top: 16px; 
+}
+
+.why-desc {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background: rgba(12,34,64,0.94);
+    color: #fff;
+    padding: 28px;
+    transform: translateY(10%);
+    opacity: 0;
+    transition: transform 0.28s ease, opacity 0.28s ease;
+    font-size: 1rem;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.why-card.open .why-desc {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.why-card.open { outline: none; box-shadow: none; }
+
+.why-card:focus { outline: 3px solid rgba(34,139,230,0.25); }
+
+
 /* Contact */
 .contact {
     padding: 80px 0;

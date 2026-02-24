@@ -63,6 +63,8 @@ window.addEventListener('DOMContentLoaded', () => {
     addAnimationClasses();
     animateHeaderImmediately();
     animateOnScroll();
+    bindWhyCardClicks();
+
 
     // Calendly modal integration
     const calendlyModal = document.getElementById('calendly-modal');
@@ -98,4 +100,77 @@ window.addEventListener('DOMContentLoaded', () => {
             if (e.target === calendlyModal) calendlyModal.style.display = 'none';
         });
     }
+
+     //For Why Auxano Section
+        if (window.location.pathname.includes('Sections/')) {
+            const page = window.location.pathname.split('/').pop().replace('.html','');
+            window.location.href = '../index.html?page=' + page;
+        }
+
+    // Click-to-reveal for Why Auxano cards
+    function bindWhyCardClicks() {
+        document.querySelectorAll('.why-card').forEach(card => {
+            // click opens the card and closes any other open cards
+            card.addEventListener('click', (e) => {
+                
+                const isOpen = !card.classList.contains('open');
+                // close others
+                document.querySelectorAll('.why-card.open').forEach(c => {
+                    if (c !== card) {
+                        c.classList.remove('open');
+                        c.setAttribute('aria-expanded', 'false');
+                        const d = c.querySelector('.why-desc'); if (d) d.setAttribute('aria-hidden', 'true');
+                    }
+                });
+                // toggle this one
+                if (isOpen) {
+                    card.classList.add('open');
+                    card.setAttribute('aria-expanded','true');
+                    const desc = card.querySelector('.why-desc'); if (desc) desc.setAttribute('aria-hidden','false');
+                } else {
+                    card.classList.remove('open');
+                    card.setAttribute('aria-expanded','false');
+                    const desc = card.querySelector('.why-desc'); if (desc) desc.setAttribute('aria-hidden','true');
+                }
+                try { card.blur(); } catch(e){}
+            });
+            // keyboard activation
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+                if (e.key === 'Escape') {
+                    // close this card
+                    card.classList.remove('open');
+                    card.setAttribute('aria-expanded','false');
+                    const desc = card.querySelector('.why-desc'); if (desc) desc.setAttribute('aria-hidden','true');
+                }
+            });
+            
+        });
+        // global Escape handler: close all
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.why-card.open').forEach(c => {
+                    c.classList.remove('open');
+                    c.setAttribute('aria-expanded','false');
+                    const d = c.querySelector('.why-desc'); if (d) d.setAttribute('aria-hidden','true');
+                });
+            }
+        });
+
+        // close open descriptions when clicking outside any .why-card
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.why-card')) {
+                document.querySelectorAll('.why-card.open').forEach(c => {
+                    c.classList.remove('open');
+                    c.setAttribute('aria-expanded','false');
+                    const d = c.querySelector('.why-desc'); if (d) d.setAttribute('aria-hidden','true');
+                });
+            }
+        });
+    }
+
+   
 });
