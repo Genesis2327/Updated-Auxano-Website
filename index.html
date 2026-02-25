@@ -37,6 +37,13 @@
         <div class="container hero-grid">
             <div class="hero-content">
                 <h1 class="hero-title">WHERE PROGRESS STAYS IN SYNC</h1>
+
+                <!-- Mobile-only hero image directly under the title -->
+                <div class="hero-image hero-image-mobile">
+                    <img src="Assets/images/homepage.jpg" alt="Workforce management analytics" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="hero-image-placeholder" style="display:none;">Add homepage.jpg to Assets/images</div>
+                </div>
+
                 <p class="hero-subheading">AUXANO IS A SMART WORKFORCE AND PAYROLL MANAGEMENT SYSTEM BUILT FOR MODERN TEAMS.</p>
                 <p class="hero-desc">Streamline time tracking, leave management, and payroll in one secure platform. Give your people clarity and your operations control—without the spreadsheets.</p>
                 <div class="hero-cta">
@@ -44,7 +51,7 @@
                     <a href="calendly-book-demo.html" class="btn btn-hero-demo">Book a Demo</a>
                 </div>
             </div>
-            <div class="hero-image">
+            <div class="hero-image hero-image-desktop">
                 <img src="Assets/images/homepage.jpg" alt="Workforce management analytics" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" role="img" aria-label="Workforce management analytics">
                 <div class="hero-image-placeholder" style="display:none;">Add homepage.jpg to Assets/images</div>
             </div>
@@ -288,21 +295,21 @@
         <div class="footer-content container">
             <div class="footer-col">
                 <img src="Assets/logo/auxano_logo.png" alt="Auxano logo" class="footer-logo" loading="lazy" role="img" aria-label="Auxano logo">
-                <p>Smart workforce and payroll management for modern teams.</p>
+                <p class="footer-extra">Smart workforce and payroll management for modern teams.</p>
             </div>
             <div class="footer-col footer-contacts">
                 <h4>CONTACTS</h4>
                 <p><img src="Assets/images/mail.png" alt="Email" class="footer-icon" loading="lazy" role="img" aria-label="Email">auxano.devteam@email.com</p>
                 <p><img src="Assets/images/phone.png" alt="Phone" class="footer-icon" loading="lazy" role="img" aria-label="Phone">099 - 2345 - 079</p>
-                <p><img src="Assets/images/web.png" alt="Web" class="footer-icon" loading="lazy" role="img" aria-label="Web">auxano.ph.com</p>
+                <p class="footer-extra"><img src="Assets/images/web.png" alt="Web" class="footer-icon" loading="lazy" role="img" aria-label="Web">auxano.ph.com</p>
             </div>
             <div class="footer-col footer-links">
                 <h4>QUICK LINKS</h4>
                 <a href="#home">Home</a>
                 <a href="#features">Features</a>
-                <a href="#how-it-works">How It Works</a>
+                <a href="#how-it-works" class="footer-extra">How It Works</a>
                 <a href="#contact">Contact Us</a>
-                <a href="calendly-book-demo.html">Book a Demo</a>
+                <a href="calendly-book-demo.html" class="footer-extra">Book a Demo</a>
             </div>
             <div class="footer-col footer-social">
                 <h4>FOLLOW US</h4>
