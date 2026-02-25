@@ -21,7 +21,7 @@ function animateOnScroll() {
 }
 
 function addAnimationClasses() {
-    // 1. Add .animate to all major elements
+    // 1. Add .animate to all major elements EXCEPT the logo and its children
     const selectors = [
         'h1', 'h2', 'h3', 'p', 'section', '.feature-row', '.step', 
         '.contact-form', '.cta-banner', '.footer-col', '.hero-image img'
@@ -29,19 +29,21 @@ function addAnimationClasses() {
     
     selectors.forEach(sel => {
         document.querySelectorAll(sel).forEach(el => {
-            el.classList.add('animate');
+            // Check if the element is NOT the logo and NOT inside the logo container
+            if (!el.closest('.logo')) {
+                el.classList.add('animate');
+            }
         });
     });
 
-    // 2. Animate nav links ONLY (excluding the logo link)
-    // This targets <a> tags inside <li>, leaving the logo <a> alone
+    // 2. Animate nav links ONLY (this specifically targets links inside the <ul>)
     document.querySelectorAll('.nav-links a').forEach(el => {
         el.classList.add('animate');
     });
 
-    // 3. Animate images EXCEPT those inside the logo
+    // 3. Animate all images EXCEPT the specific logo-icon in the header
     document.querySelectorAll('img').forEach(img => {
-        if (!img.closest('.logo')) {
+        if (!img.classList.contains('logo-icon') && !img.closest('.logo')) {
             img.classList.add('animate');
         }
     });
@@ -51,7 +53,6 @@ function addAnimationClasses() {
         row.classList.add(row.classList.contains('reverse') ? 'slide-right' : 'slide-left');
     });
 }
-
 function animateHeaderImmediately() {
     // Only animate the links in the list, not the whole nav or logo
     document.querySelectorAll('.nav-links a').forEach(el => {

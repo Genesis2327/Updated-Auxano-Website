@@ -46,6 +46,8 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* Buttons */
 .btn {
+    position: relative;
+    overflow: hidden;
     display: inline-block;
     padding: 12px 28px;
     font-family: 'Montserrat', sans-serif;
@@ -54,37 +56,227 @@ img { max-width: 100%; height: auto; display: block; }
     border-radius: 8px;
     transition: all 0.2s;
     cursor: pointer;
-    border: 2px solid transparent;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-.btn-hero-learn {
-    background: var(--teal-btn);
-    color: var(--white);
-    border: 2px solid #000;
+/* Shine Layer */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
 }
-.btn-hero-learn:hover { background: var(--blue-darker); transform: translateY(-3px) scale(1.04); filter: brightness(1.05); }
+
+.btn:hover::after {
+    animation: shine 0.8s forwards;
+}
+
+@keyframes shine {
+    100% { left: 150%; }
+}
+
+/* === COMPREHENSIVE ANIMATION KEYFRAMES === */
+
+/* Fade & Scale Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 3D Lift Effects */
+@keyframes lift3D {
+    from {
+        transform: translateY(0) perspective(1000px) rotateX(0deg);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    to {
+        transform: translateY(-10px) perspective(1000px) rotateX(5deg);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Pulse & Glow */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(114, 201, 209, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(114, 201, 209, 0.8);
+    }
+}
+
+/* Slide Animations */
+@keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Number Counter */
+@keyframes countUp {
+    from { --num: 0; }
+    to { --num: 100; }
+}
+
+/* Border Animation */
+@keyframes borderSlide {
+    from {
+        border-bottom-width: 0;
+    }
+    to {
+        border-bottom-width: 2px;
+    }
+}
+
+/* Ripple Effect */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Bounce */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Rotate */
+@keyframes rotate360 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Gradient Shift */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* === ANIMATION UTILITY CLASSES === */
+
+.animate-fade-in { animation: fadeIn 0.6s ease-out; }
+.animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
+.animate-fade-in-down { animation: fadeInDown 0.6s ease-out; }
+.animate-fade-in-left { animation: fadeInLeft 0.6s ease-out; }
+.animate-fade-in-right { animation: fadeInRight 0.6s ease-out; }
+.animate-pulse { animation: pulse 2s ease-in-out infinite; }
+.animate-bounce { animation: bounce 0.8s ease-in-out infinite; }
+.animate-glow { animation: glow 2s ease-in-out infinite; }
+
+/* Staggered animations for lists */
+.animate-stagger > * {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+.animate-stagger > *:nth-child(1) { animation-delay: 0s; }
+.animate-stagger > *:nth-child(2) { animation-delay: 0.1s; }
+.animate-stagger > *:nth-child(3) { animation-delay: 0.2s; }
+.animate-stagger > *:nth-child(4) { animation-delay: 0.3s; }
+.animate-stagger > *:nth-child(5) { animation-delay: 0.4s; }
+.animate-stagger > *:nth-child(n+6) { animation-delay: 0.5s; }
+
+.btn-hero-learn {
+    background:#1c8783;
+    color: var(--white);
+}
+.btn-hero-learn:hover {
+    background: var(--blue-darker); 
+    transform: translateY(-3px) scale(1.04); 
+    filter: brightness(1.05); 
+}
 
 .btn-hero-demo {
     background: var(--blue-dark);
     color: var(--white);
-    border: 2px solid #000;
 }
 .btn-hero-demo:hover { background: var(--blue-darker); transform: translateY(-3px) scale(1.04); filter: brightness(1.05); }
 
 .btn-primary {
     background: #325474;
     color: var(--white);
-    border-color: black;
+   
 }
 
-.btn-primary:hover { background: var(--blue-darker); transform: translateY(-3px) scale(1.04); filter: brightness(1.05); }
+.btn-primary:hover {
+    background: var(--blue-darker); 
+    transform: translateY(-3px) scale(1.04); 
+    filter: brightness(1.05); 
+}
 
 .btn-outline-dark {
     background: #325474;
     color: white;
-    border-color: black;
+    
 }
 
 .btn-outline-dark:hover { background: var(--blue-darker); transform: translateY(-3px) scale(1.04); filter: brightness(1.05); }
@@ -130,8 +322,9 @@ img { max-width: 100%; height: auto; display: block; }
     height: auto;
     width: auto;
     display: block;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.3s ease, transform 0.3s ease, filter 0.3s ease;
 }
+
 
 .nav-links {
     display: flex;
@@ -144,11 +337,16 @@ img { max-width: 100%; height: auto; display: block; }
     font-weight: 500;
     color: var(--gray-800);
     text-transform: uppercase;
-    transition: color 0.2s;
+    transition: color 0.2s, border-bottom 0.3s ease;
     white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
 }
 
-.nav-links a:hover { color: var(--blue-dark); }
+.nav-links a:hover { 
+    color: var(--blue-dark);
+    border-bottom: 2px solid var(--blue-dark);
+}
 
 .btn-nav {
     padding: 8px 16px !important;
@@ -209,7 +407,7 @@ img { max-width: 100%; height: auto; display: block; }
     margin-bottom: 50px;
     line-height: 1.2;
     white-space: nowrap;
-}
+}img
 
 .hero-subheading {
     font-family: 'Montserrat', sans-serif;
@@ -327,7 +525,10 @@ img { max-width: 100%; height: auto; display: block; }
     gap: 25px;
     width: 100%;
     max-width: 1200px;
-    margin: 30px auto; /* reduced vertical gap */
+    margin: 30px auto;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-fill-mode: both;
 }
 .feature-row.reverse {
     flex-direction: row-reverse;
@@ -502,9 +703,9 @@ img { max-width: 100%; height: auto; display: block; }
     margin-bottom: 40px;
     align-items: center; /* Vertically aligns circle and title */
     background: #dae5e7; /* user-specified box background */
-    border: 2px solid #2a3250; /* user-specified border color */
     border-radius: 12px;
     padding: 24px;
+    box-shadow: 7px 7px 0 0 #11233b;
 }
 
 .step-number {
@@ -552,7 +753,7 @@ img { max-width: 100%; height: auto; display: block; }
 /*Why Section*/
 /* Why Auxano section and carousel */
 .why-auxano {
-    padding: 48px 0 72px;
+    padding: 50px 0 72px;
     background: linear-gradient(90deg, #ffffff, #e1e5f1, #72c9d1);
 }
 .why-auxano .section-title {
@@ -571,7 +772,7 @@ img { max-width: 100%; height: auto; display: block; }
 .why-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
+    gap: 50px;
     /* full-bleed without causing horizontal overflow */
     width: 100%;
     max-width: 100%;
@@ -607,7 +808,12 @@ img { max-width: 100%; height: auto; display: block; }
     max-width: 720px; 
 }
 .why-cta { 
-    display: inline-block; margin-top: 16px; 
+    display: inline-block; 
+    margin-top: 16px; 
+    background-color: #20a39e;
+}
+.why-cta:hover{ 
+    background-color: #20a39e;
 }
 
 .why-desc {
@@ -684,22 +890,20 @@ img { max-width: 100%; height: auto; display: block; }
     padding: 14px 18px;
     font-family: inherit;
     font-size: 1rem;
-    border: 1px solid var(--blue-darker);
+    border: 2px solid var(--blue-darker);
     border-radius: 8px;
     margin-bottom: 10px;
-}
-
-.contact-form button {
-    width: auto;              /* shrink to content */
-    align-self: flex-start;   /* align left within form */
-    padding: 12px 24px;       /* a bit tighter padding */
-    margin-top: 10px;
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+    background: white;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
     border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(114, 201, 209, 0.1), inset 0 0 0 1px var(--teal);
+    transform: scale(1.02);
+    animation: glow 0.8s ease-in-out;
 }
 
 .contact-brand {
@@ -865,6 +1069,44 @@ img { max-width: 100%; height: auto; display: block; }
     flex-wrap: wrap;
     overflow-wrap: anywhere;
 }
+
+/* Footer Bottom Styles */
+.footer-bottom {
+    background-color: var(--blue-darker); /* Matches the dark navy in your screenshot */
+    padding: 20px 0 40px 0;
+    text-align: center;
+}
+
+.footer-divider {
+    border: none;
+    height: 1px;
+    /* This creates the blue-to-transparent fade effect seen in the image */
+    background: radial-gradient(circle, rgba(114, 201, 209, 0.5) 0%, rgba(5, 22, 43, 0) 70%);
+    box-shadow: 0px 0px 10px rgba(114, 201, 209, 0.2);
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.copyright-wrapper p {
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Ensure the copyright symbol (c) looks clean */
+.copyright-wrapper p::before {
+    content: "";
+    display: inline-block;
+}
+/* Section spacing: create large gap between major sections */
+section {
+    margin-bottom: 120px;
+}
+
 
 /* Desktop-only: keep contact lines (email, phone, web) on a single line */
 @media (min-width: 1025px) {
