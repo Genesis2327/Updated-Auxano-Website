@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
     addAnimationClasses();
     animateHeaderImmediately();
     animateOnScroll();
-    bindWhyCardClicks();
+    // bindWhyCardClicks(); // Removed: Now using CSS hover instead of click-to-reveal
 
 
     // Calendly modal integration

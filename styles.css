@@ -44,57 +44,92 @@ img { max-width: 100%; height: auto; display: block; }
 
 .header .container { max-width: 100%; padding: 0 32px; }
 
-/* Buttons */
+/* 2. Enhanced Buttons (Borderless & Shine) */
 .btn {
+    position: relative;
+    overflow: hidden;
     display: inline-block;
     padding: 12px 28px;
     font-family: 'Montserrat', sans-serif;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 700;
     border-radius: 8px;
-    transition: all 0.2s;
+    border: none; 
     cursor: pointer;
-    border: 2px solid transparent;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--white) !important; /* Ensures text stays white, no link blue */
+    text-align: center;
+    text-decoration: none; /* Secondary safeguard */
 }
 
-.btn-hero-learn {
-    background: var(--teal-btn);
-    color: var(--white);
-    border: 2px solid #000;
+/* Shine Layer */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
 }
-.btn-hero-learn:hover { background: var(--blue-darker); }
 
-.btn-hero-demo {
+.btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    filter: brightness(1.05);
+}
+
+.btn:focus {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+}
+.btn:hover::after {
+    animation: shine 0.8s forwards;
+}
+
+@keyframes shine {
+    100% { left: 150%; }
+}
+
+/* Specific Button Variants */
+.btn-hero-learn { background: var(--teal-btn); }
+.btn-hero-demo { background: var(--blue-dark); }
+.btn-primary { background: #0b2545; padding: 14px 32px; }
+.btn-teal { background: var(--teal); }
+.btn-nav {
+    padding: 8px 16px !important;
+    font-size: 0.75rem !important;
     background: var(--blue-dark);
-    color: var(--white);
-    border: 2px solid #000;
+    border-radius: 50px;
 }
-.btn-hero-demo:hover { background: var(--blue-darker); }
-
-.btn-primary {
-    background: #325474;
-    color: var(--white);
-    border-color: black;
+.btn-outline-dark{
+    background-color: #0b2545;
 }
 
-.btn-primary:hover { background: var(--blue-darker); }
-
-.btn-outline-dark {
-    background: #325474;
-    color: white;
-    border-color: black;
+/* Override for specific sections */
+.btn-hero-learn:hover, 
+.btn-hero-demo:hover, 
+.btn-outline-dark:hover { 
+    background: var(--blue-darker); 
 }
 
-.btn-outline-dark:hover { background: var(--blue-darker); }
-
-.btn-teal {
-    background: var(--teal);
-    color: var(--white);
+/* CTA Banner Button */
+.cta-banner .btn-teal {
+    margin-top: 30px;
+    background: var(--white);
+    color: var(--blue-darker) !important;
 }
 
-/* Header */
+/* Rest of your Layout CSS follows... */
 .header {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -102,8 +137,8 @@ img { max-width: 100%; height: auto; display: block; }
     background: var(--white);
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     padding: 12px 0;
-    /* Height is naturally determined by the nav padding/font size */
 }
+
 
 .nav {
     display: flex;
@@ -137,12 +172,14 @@ img { max-width: 100%; height: auto; display: block; }
     gap: 24px;
 }
 
+/* Navigation Links - Specifically removing underlines here too */
 .nav-links a {
     font-size: 0.8rem;
     font-weight: 500;
     color: var(--gray-800);
     text-transform: uppercase;
     transition: color 0.2s;
+    text-decoration: none; 
 }
 
 .nav-links a:hover { color: var(--blue-dark); }
@@ -236,7 +273,7 @@ img { max-width: 100%; height: auto; display: block; }
     width: auto;
     object-fit: contain;
     object-position: right center;
-    border-radius: 32px;
+    border-radius: 20px;
     box-shadow: none;
 }
 
@@ -295,18 +332,21 @@ img { max-width: 100%; height: auto; display: block; }
     font-size: clamp(1.75rem, 3vw, 2.5rem);
     font-weight: 700;
     color: #1a2b3c;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(44,75,114,0.08);
 }
 
 /* Section Description */
 .section-desc {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #2a3250;
     text-align: center;
     max-width: 700px;
     margin: 0 auto 48px;
+    line-height: 1.8;
 }
 
 
@@ -316,11 +356,15 @@ img { max-width: 100%; height: auto; display: block; }
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 25px;
+    gap: 32px;
     width: 100%;
     max-width: 1200px;
-    margin: 30px auto; /* reduced vertical gap */
+    margin: 40px auto 48px auto;
+    transition: box-shadow 0.3s, transform 0.3s;
+    border-radius: 18px;
+    
 }
+
 .feature-row.reverse {
     flex-direction: row-reverse;
     justify-content: flex-end;
@@ -470,15 +514,15 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .how-it-works {
-    padding: 80px 0;
+    padding: 80px 60px;
     background: var(--gradient);
 }
 
 .steps {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 100px;
-    margin-bottom: 40px;
+        gap: 100px;
+        margin-bottom: 40px;
 }
 
 .step {
@@ -494,9 +538,9 @@ img { max-width: 100%; height: auto; display: block; }
     margin-bottom: 40px;
     align-items: center; /* Vertically aligns circle and title */
     background: #dae5e7; /* user-specified box background */
-    border: 2px solid #2a3250; /* user-specified border color */
     border-radius: 12px;
     padding: 24px;
+    box-shadow: 7px 7px 0 0 #11233b; /* user-specified shadow */
 }
 
 .step-number {
@@ -542,7 +586,6 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /*Why Section*/
-/* Why Auxano section and carousel */
 .why-auxano {
     padding: 48px 0 72px;
     background: linear-gradient(90deg, #ffffff, #e1e5f1, #72c9d1);
@@ -564,18 +607,20 @@ img { max-width: 100%; height: auto; display: block; }
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px;
-    /* span full viewport width */
     max-width: none;
     width: 100vw;
     margin-left: calc(50% - 50vw);
 }
+
 .why-card {
     position: relative;
     overflow: hidden;
-    border-radius: 0; /* flush edges when full-bleed */
-    min-height: 200px;
+    border-radius: 16px;
+    min-height: 280px;
     display: flex;
     align-items: stretch;
+    padding: 0;
+
 }
 .why-card img {
     width: 100%;
@@ -583,54 +628,42 @@ img { max-width: 100%; height: auto; display: block; }
     object-fit: cover;
     display: block;
 }
-
-
-
-/* hover zoom for non-open cards */
-.why-card img { 
-    transition: transform 0.45s ease; 
-}
-.why-card:not(.open):hover img {
-     transform: scale(1.035); 
-    }
-
-.why-desc-content { 
-    max-width: 720px; 
-}
 .why-cta { 
-    display: inline-block; margin-top: 16px; 
+    display: inline-block; 
+    margin-top: 16px; 
+    background-color: #20a39e;
+    color: var(--blue-darker);
 }
 
 .why-desc {
     position: absolute;
-    left: 0;
+    left: 35px;
     right: 0;
     top: 0;
     bottom: 0;
     height: 100%;
-    background: rgba(12,34,64,0.94);
+    background: rgba(12,34,64,0.92);
     color: #fff;
-    padding: 28px;
+    padding: 28px 24px;
     transform: translateY(10%);
     opacity: 0;
     transition: transform 0.28s ease, opacity 0.28s ease;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 0.95rem;
+    line-height: 1.6;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    border-radius: 16px;
+    max-width: 85%;
+    overflow: hidden;
 }
 
-.why-card.open .why-desc {
+.why-card:hover .why-desc {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
 }
-
-.why-card.open { outline: none; box-shadow: none; }
-
-.why-card:focus { outline: 3px solid rgba(34,139,230,0.25); }
 
 
 /* Contact */
@@ -751,7 +784,8 @@ img { max-width: 100%; height: auto; display: block; }
 .footer {
     background: var(--blue-darker); /* solid dark navy */
     color: var(--white);
-    margin-top: 80px; /* separate from content above */
+    margin-top: 100px; /* more space above footer */
+    padding-top: 48px;
 }
 
 .cta-banner {
@@ -791,8 +825,10 @@ img { max-width: 100%; height: auto; display: block; }
     color: var(--blue-darker);
 }
 
-.cta-banner .btn-teal:hover {
-    background: white;
+
+.btn-teal:hover{
+    background: var(--teal-btn);
+    color: var(--blue-darker) !important;
 }
 
 .footer-content {
@@ -800,8 +836,10 @@ img { max-width: 100%; height: auto; display: block; }
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-items: center;
     gap: 60px;
-    padding: 30px 24px 20px;
+    padding: 48px 24px 32px;
     color: var(--white);
+    border-radius: 32px 32px 0 0;
+    box-shadow: 0 -2px 24px rgba(44,75,114,0.08);
 }
 
 .footer-logo {
@@ -827,7 +865,12 @@ img { max-width: 100%; height: auto; display: block; }
 .footer-col a { font-size: 0.95rem; color: var(--white); }
 
 /* underline quick links */
-.footer-links a { text-decoration: underline; margin-bottom: 6px; display: block; }
+
+.footer-links a { 
+    text-decoration: none !important; /* Removes the underline you had here previously */
+    margin-bottom: 6px; 
+    display: block; 
+}
 
 /* icons inside footer */
 .footer-icon {
@@ -861,14 +904,38 @@ img { max-width: 100%; height: auto; display: block; }
 
 .footer-col a:hover { color: var(--teal); }
 
+/* Footer Bottom Styles */
 .footer-bottom {
-    padding: 24px;
+    background-color: var(--blue-darker); /* Matches the dark navy in your screenshot */
+    padding: 20px 0 40px 0;
     text-align: center;
-    border-top: 1px solid rgba(0,0,0,0.08);
 }
 
-.footer-bottom p { font-size: 0.9rem; color: var(--gray-600); }
+.footer-divider {
+    border: none;
+    height: 1px;
+    /* This creates the blue-to-transparent fade effect seen in the image */
+    background: radial-gradient(circle, rgba(114, 201, 209, 0.5) 0%, rgba(5, 22, 43, 0) 70%);
+    box-shadow: 0px 0px 10px rgba(114, 201, 209, 0.2);
+    margin-bottom: 25px;
+    width: 100%;
+}
 
+.copyright-wrapper p {
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Ensure the copyright symbol (c) looks clean */
+.copyright-wrapper p::before {
+    content: "";
+    display: inline-block;
+}
 /* Section spacing: create large gap between major sections */
 section {
     margin-bottom: 120px;
@@ -891,19 +958,21 @@ section {
     .nav-links.active { right: 0; }
     .menu-toggle { display: flex; z-index: 1001; }
     .hero { margin: 76px 16px 16px; border-radius: 32px; min-height: auto; }
-    .hero-title { white-space: normal; }
-    .hero-grid { grid-template-columns: 1fr; text-align: center; }
-    .hero-cta { justify-content: center; }
-    .hero-image { order: -1; }
-    .steps { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .feature-item {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-    .feature-item.feature-left .feature-box,
-    .feature-item.feature-left .feature-text,
-    .feature-item.feature-right .feature-text,
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100vw;
+                width: 80vw;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 32px;
+                padding: 120px 32px 32px 32px;
+                box-shadow: -4px 0 24px rgba(0,0,0,0.2);
+                transition: right 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+                z-index: 2000;
+            }
     .feature-item.feature-right .feature-box {
         order: unset;
     }
